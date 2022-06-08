@@ -2,18 +2,14 @@ name: Testing
 on: push
 jobs:
   test-and-build:
-    name: Test and Build
     strategy:
       matrix:
         os: [ubuntu-latest]
         node: [12, 14, 16]
     runs-on: ${{ matrix.os }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Using node v${{ matrix.node }}
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
 
@@ -22,17 +18,11 @@ jobs:
           path: '**/node_modules'
           key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
 
-      - name: Install packages
-        run: npm install
+      - run: npm install
+      - run: npm run test:full
+      - run: npm run build
 
-      - name: Tests
-        run: npm run test:full
-
-      - name: Build
-        run: npm run build
-
-      - name: Publish code coverage
-        uses: codecov/codecov-action@v1
+      - uses: codecov/codecov-action@v1
         with:
           file: ./**/**/coverage-final.json
           flags: unittests
