@@ -1,1 +1,2 @@
 # Universal Process Measurer
+[![Testing](https://github.com/Universal-Packages/universal-process-measurer/actions/workflows/testing.yml/badge.svg)](https://github.com/Universal-Packages/universal-process-measurer/actions/workflows/testing.yml)
