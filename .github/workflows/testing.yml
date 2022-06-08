@@ -1,0 +1,33 @@
+on: push
+name: Testing
+jobs:
+  test-and-build:
+    name: Test and Build
+    strategy:
+      matrix:
+        os: [ubuntu-20.04]
+        node: [10, 12, 14, 16]
+    runs-on: ${{ matrix.os }}
+    if: "!contains(github.event.head_commit.message, '[Publish]')"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Using node v${{ matrix.node }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+
+      - uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Install packages
+        run: npm install
+
+      - name: Tests
+        run: npm run test:full
+
+      - name: Build
+        run: npm run build
