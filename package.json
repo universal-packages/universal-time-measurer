@@ -1,5 +1,5 @@
 {
-  "name": "universal-process-measurer",
+  "name": "@universal-packages/process-measurer",
   "version": "0.0.0",
   "description": "Utility to measure process times with precision",
   "author": "David De Anda <david@universal-packages.com> (https://github.com/universal-packages)",
