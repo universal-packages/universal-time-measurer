@@ -6,7 +6,7 @@ describe('singleton', (): void => {
     await sleep(500)
 
     const measurement = finish()
-    expect(measurement.milliseconds).toBeGreaterThanOrEqual(500n)
+    expect(measurement.milliseconds).toBeGreaterThanOrEqual(500)
   })
 
   it('can not measure with diffenret instances', async (): Promise<void> => {
@@ -17,7 +17,7 @@ describe('singleton', (): void => {
     await sleep(600)
 
     const measurement = finish()
-    expect(measurement.seconds).toBe(0n)
-    expect(measurement.milliseconds).toBeGreaterThanOrEqual(600n)
+    expect(measurement.seconds).toBe(0)
+    expect(measurement.milliseconds).toBeGreaterThanOrEqual(600)
   })
 })

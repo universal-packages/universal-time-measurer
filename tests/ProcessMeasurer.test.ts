@@ -9,7 +9,7 @@ describe('ProcessMeasurer', (): void => {
 
     const measurement = processMeasurer.finish()
 
-    expect(measurement.milliseconds).toBeGreaterThanOrEqual(500n)
+    expect(measurement.milliseconds).toBeGreaterThanOrEqual(500)
   })
 
   it('can measure with diffenret instances', async (): Promise<void> => {
@@ -25,9 +25,9 @@ describe('ProcessMeasurer', (): void => {
     const measurement = processMeasurer.finish()
     const secondaryMeasurement = secondaryProcessMeasurer.finish()
 
-    expect(measurement.seconds).toBe(1n)
-    expect(secondaryMeasurement.seconds).toBe(0n)
-    expect(secondaryMeasurement.milliseconds).toBeGreaterThanOrEqual(600n)
+    expect(measurement.seconds).toBe(1)
+    expect(secondaryMeasurement.seconds).toBe(0)
+    expect(secondaryMeasurement.milliseconds).toBeGreaterThanOrEqual(600)
   })
 
   it('throws if calling finish without calling start first', async (): Promise<void> => {
