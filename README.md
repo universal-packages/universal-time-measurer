@@ -1,25 +1,25 @@
-# Process Measurer
-[![npm version](https://badge.fury.io/js/@universal-packages%2Fprocess-measurer.svg)](https://www.npmjs.com/package/@universal-packages/process-measurer)
-[![Testing](https://github.com/Universal-Packages/universal-process-measurer/actions/workflows/testing.yml/badge.svg)](https://github.com/Universal-Packages/universal-process-measurer/actions/workflows/testing.yml)
-[![codecov](https://codecov.io/gh/Universal-Packages/process-measurer/branch/main/graph/badge.svg?token=CXPJSN8IGL)](https://codecov.io/gh/Universal-Packages/universal-process-measurer)
+# Time Measurer
+[![npm version](https://badge.fury.io/js/@universal-packages%time-measurer.svg)](https://www.npmjs.com/package/@universal-packages/time-measurer)
+[![Testing](https://github.com/Universal-Packages/universal-time-measurer/actions/workflows/testing.yml/badge.svg)](https://github.com/Universal-Packages/universal-time-measurer/actions/workflows/testing.yml)
+[![codecov](https://codecov.io/gh/Universal-Packages/time-measurer/branch/main/graph/badge.svg?token=CXPJSN8IGL)](https://codecov.io/gh/Universal-Packages/universal-time-measurer)
 
-Process Measurer is a simple wrap for `process.hrtime` to measure time with procession and express that time easily through formatted representations, anytime you want to express how much a query or a request took at code level you may want to give this a try.
+Time Measurer is a simple wrap for `process.hrtime` to measure time with procession and express that time easily through formatted representations, anytime you want to express how much a query or a request took at code level you may want to give this a try.
 
 ## Install
 
 ```shell
-npm install @universal-packages/process-measurer
+npm install @universal-packages/time-measurer
 ```
 
-## ProcessMeasurer
+## TimeMeasurer
 
-Class `Process Measurer` provides an instantiable interface to start measuring time from any part of your code.
+Class `TimeMeasurer` provides an instantiable interface to start measuring time from any part of your code.
 
 ```js
-import ProcessMeasurer from '@universal-packages/process-measurer'
+import TimeMeasurer from '@universal-packages/time-measurer'
 
 async function getAll() {
-  const measurer = new ProcessMeasurer()
+  const measurer = new TimeMeasurer()
 
   measurer.start()
 
@@ -77,10 +77,10 @@ measurement.toDate()
 
 ## Functional
 
-A more simple way to use the process measurer API is by importing just the `start` and `finish` functions, the only disadvantage here is that you can only measure one thing at a time, unlike `ProcessMeasurer` that can be instantiated multiple times and measurer several things useful when you have a lot of async tasks running.
+A more simple way to use the time measurer API is by importing just the `start` and `finish` functions, the only disadvantage here is that you can only measure one thing at a time, unlike `TimeMeasurer` that can be instantiated multiple times and measurer several things useful when you have a lot of async tasks running.
 
 ```ts
-import { start, finish } from '@universal-packages/process-measurer'
+import { start, finish } from '@universal-packages/time-measurer'
 
 async function getAll() {
   start()
@@ -97,14 +97,14 @@ getAll()
 
 ## Sleep
 
-Process measurer ships with a convenient sleep function that takes a single parameter `time` in milliseconds, internally it is just a promise with a timeout that resolves it.
+Time measurer ships with a convenient sleep function that takes a single parameter `time` in milliseconds, internally it is just a promise with a timeout that resolves it.
 
 
 ```js
-import ProcessMeasurer, { sleep } from '@universal-packages/process-measurer'
+import TimeMeasurer, { sleep } from '@universal-packages/time-measurer'
 
 async function waitable() {
-  ProcessMeasurer.sleep(1000)
+  TimeMeasurer.sleep(1000)
 
   sleep(2000)
 }
@@ -113,11 +113,11 @@ async function waitable() {
 
 ## Typescript
 
-Process Measurer is developed in TypeScript and shipped fully typed.
+Time Measurer is developed in TypeScript and shipped fully typed.
 
 ## Contributing
 
-Development of Process Measurer happens in the open on GitHub, and we are grateful to the community for contributing bugfixes and improvements. Read below to learn how you can take part in improving Recoil.
+Development of Time Measurer happens in the open on GitHub, and we are grateful to the community for contributing bugfixes and improvements. Read below to learn how you can take part in improving Recoil.
 
 - [Code of Conduct](./CODE_OF_CONDUCT.md)
 - [Contributing Guide](./CONTRIBUTING.md)

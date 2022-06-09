@@ -1,4 +1,4 @@
-export { default } from './ProcessMeasurer'
+export { default } from './TimeMeasurer'
 export { default as Measurement } from './Measurement'
 export * from './Measurement.types'
 export { default as sleep } from './sleep'

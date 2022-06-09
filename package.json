@@ -1,12 +1,12 @@
 {
-  "name": "@universal-packages/process-measurer",
+  "name": "@universal-packages/time-measurer",
   "version": "1.0.0",
-  "description": "Utility to measure process times with precision",
+  "description": "Utility to measure routines times with precision",
   "author": "David De Anda <david@universal-packages.com> (https://github.com/universal-packages)",
   "license": "MIT",
   "main": "index.js",
   "types": "index.d.ts",
-  "repository": "git://git@github.com/universal-packeges/universal-process-measurer.git",
+  "repository": "git://git@github.com/universal-packeges/universal-time-measurer.git",
   "scripts": {
     "build": "tsc --p tsconfig.dis.json",
     "test": "jest --watch",

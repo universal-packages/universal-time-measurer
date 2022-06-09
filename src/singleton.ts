@@ -1,7 +1,7 @@
 import Measurement from './Measurement'
-import ProcessMeasurer from './ProcessMeasurer'
+import TimeMeasurer from './TimeMeasurer'
 
-const PROCESS_MEASURER = new ProcessMeasurer()
+const PROCESS_MEASURER = new TimeMeasurer()
 
 export function start(): void {
   PROCESS_MEASURER.start()
