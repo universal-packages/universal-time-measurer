@@ -1,5 +1,5 @@
 # Time Measurer
-[![npm version](https://badge.fury.io/js/@universal-packages%time-measurer.svg)](https://www.npmjs.com/package/@universal-packages/time-measurer)
+[![npm version](https://badge.fury.io/js/@universal-packages%2Ftime-measurer.svg)](https://www.npmjs.com/package/@universal-packages/time-measurer)
 [![Testing](https://github.com/Universal-Packages/universal-time-measurer/actions/workflows/testing.yml/badge.svg)](https://github.com/Universal-Packages/universal-time-measurer/actions/workflows/testing.yml)
 [![codecov](https://codecov.io/gh/Universal-Packages/universal-time-measurer/branch/main/graph/badge.svg?token=CXPJSN8IGL)](https://codecov.io/gh/Universal-Packages/universal-time-measurer)
 
