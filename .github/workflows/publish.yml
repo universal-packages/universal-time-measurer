@@ -17,6 +17,7 @@ jobs:
       - run: npm run test:full
       - run: npm run build
       - run: cp package.json dist
+      - run: cp README.md dist
 
       - uses: JS-DevTools/npm-publish@v1
         with:
