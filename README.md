@@ -1,7 +1,7 @@
 # Time Measurer
 [![npm version](https://badge.fury.io/js/@universal-packages%2Ftime-measurer.svg)](https://www.npmjs.com/package/@universal-packages/time-measurer)
-[![Testing](https://github.com/Universal-Packages/universal-time-measurer/actions/workflows/testing.yml/badge.svg)](https://github.com/Universal-Packages/universal-time-measurer/actions/workflows/testing.yml)
-[![codecov](https://codecov.io/gh/Universal-Packages/universal-time-measurer/branch/main/graph/badge.svg?token=CXPJSN8IGL)](https://codecov.io/gh/Universal-Packages/universal-time-measurer)
+[![Testing](https://github.com/universal-packages/universal-time-measurer/actions/workflows/testing.yml/badge.svg)](https://github.com/universal-packages/universal-time-measurer/actions/workflows/testing.yml)
+[![codecov](https://codecov.io/gh/universal-packages/universal-time-measurer/branch/main/graph/badge.svg?token=CXPJSN8IGL)](https://codecov.io/gh/universal-packages/universal-time-measurer)
 
 Time Measurer is a simple wrap for `process.hrtime` to measure time with procession and express that time easily through formatted representations, anytime you want to express how much a query or a request took at code level you may want to give this a try.
 
