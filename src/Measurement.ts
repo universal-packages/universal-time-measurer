@@ -52,11 +52,11 @@ export default class Measurement {
 
   private getHuman(): string {
     if (this.hours !== 0) {
-      return `${this.pad(this.hours)}hrs ${this.pad(this.minutes)}min ${this.pad(this.seconds)}.${this.pad(this.milliseconds, 3)}sec`
+      return `${this.hours}hrs ${this.minutes}min ${this.seconds}.${this.pad(this.milliseconds, 3)}sec`
     } else if (this.minutes !== 0) {
-      return `${this.pad(this.minutes)}min ${this.pad(this.seconds)}.${this.pad(this.milliseconds, 3)}sec`
+      return `${this.minutes}min ${this.seconds}.${this.pad(this.milliseconds, 3)}sec`
     } else if (this.seconds !== 0) {
-      return `${this.pad(this.seconds)}.${this.pad(this.milliseconds, 3)}sec`
+      return `${this.seconds}.${this.pad(this.milliseconds, 3)}sec`
     } else {
       return `${this.pad(this.milliseconds, 3, 2)}ms`
     }
@@ -64,11 +64,11 @@ export default class Measurement {
 
   private gerExpressive(): string {
     if (this.hours !== 0) {
-      return `${this.pad(this.hours)} Hours, ${this.pad(this.minutes)} Minutes, and ${this.pad(this.seconds)}.${this.pad(this.milliseconds, 3)} Seconds`
+      return `${this.hours} Hours, ${this.minutes} Minutes, and ${this.seconds}.${this.pad(this.milliseconds, 3)} Seconds`
     } else if (this.minutes !== 0) {
-      return `${this.pad(this.minutes)} Minutes, and ${this.pad(this.seconds)}.${this.pad(this.milliseconds, 3)} Seconds`
+      return `${this.minutes} Minutes, and ${this.seconds}.${this.pad(this.milliseconds, 3)} Seconds`
     } else if (this.seconds !== 0) {
-      return `${this.pad(this.seconds)}.${this.pad(this.milliseconds, 3)} Seconds`
+      return `${this.seconds}.${this.pad(this.milliseconds, 3)} Seconds`
     } else {
       return `${this.pad(this.milliseconds, 3, 2)} Milliseconds`
     }

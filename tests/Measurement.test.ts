@@ -11,26 +11,26 @@ describe('Measurement', (): void => {
   })
 
   it('can be converted into a formated string', async (): Promise<void> => {
-    let measurement = new Measurement(9351234567890n)
+    let measurement = new Measurement(9305234567890n)
 
-    expect(measurement.toString()).toEqual('02hrs 35min 51.235sec')
-    expect(measurement.toString('Condensed')).toEqual('02:35:51.235')
-    expect(measurement.toString('Human')).toEqual('02hrs 35min 51.235sec')
-    expect(measurement.toString('Expressive')).toEqual('02 Hours, 35 Minutes, and 51.235 Seconds')
+    expect(measurement.toString()).toEqual('2hrs 35min 5.235sec')
+    expect(measurement.toString('Condensed')).toEqual('02:35:05.235')
+    expect(measurement.toString('Human')).toEqual('2hrs 35min 5.235sec')
+    expect(measurement.toString('Expressive')).toEqual('2 Hours, 35 Minutes, and 5.235 Seconds')
 
-    measurement = new Measurement(351234567890n)
+    measurement = new Measurement(305234567890n)
 
-    expect(measurement.toString()).toEqual('05min 51.235sec')
-    expect(measurement.toString('Condensed')).toEqual('05:51.235')
-    expect(measurement.toString('Human')).toEqual('05min 51.235sec')
-    expect(measurement.toString('Expressive')).toEqual('05 Minutes, and 51.235 Seconds')
+    expect(measurement.toString()).toEqual('5min 5.235sec')
+    expect(measurement.toString('Condensed')).toEqual('05:05.235')
+    expect(measurement.toString('Human')).toEqual('5min 5.235sec')
+    expect(measurement.toString('Expressive')).toEqual('5 Minutes, and 5.235 Seconds')
 
-    measurement = new Measurement(51234567890n)
+    measurement = new Measurement(5234567890n)
 
-    expect(measurement.toString()).toEqual('51.235sec')
-    expect(measurement.toString('Condensed')).toEqual('51.235')
-    expect(measurement.toString('Human')).toEqual('51.235sec')
-    expect(measurement.toString('Expressive')).toEqual('51.235 Seconds')
+    expect(measurement.toString()).toEqual('5.235sec')
+    expect(measurement.toString('Condensed')).toEqual('5.235')
+    expect(measurement.toString('Human')).toEqual('5.235sec')
+    expect(measurement.toString('Expressive')).toEqual('5.235 Seconds')
 
     measurement = new Measurement(4567890n)
 
