@@ -3,7 +3,7 @@
 [![Testing](https://github.com/universal-packages/universal-time-measurer/actions/workflows/testing.yml/badge.svg)](https://github.com/universal-packages/universal-time-measurer/actions/workflows/testing.yml)
 [![codecov](https://codecov.io/gh/universal-packages/universal-time-measurer/branch/main/graph/badge.svg?token=CXPJSN8IGL)](https://codecov.io/gh/universal-packages/universal-time-measurer)
 
-Time Measurer is a simple wrap for `process.hrtime` to measure time with procession and express that time easily through formatted representations, anytime you want to express how much a query or a request took at code level you may want to give this a try.
+Time Measurer is a simple wrap for `process.hrtime.bigint` to measure time with procession and express that time easily through formatted representations, anytime you want to express how much a query or a request took at code level you may want to give this a try.
 
 ## Install
 
@@ -11,9 +11,29 @@ Time Measurer is a simple wrap for `process.hrtime` to measure time with process
 npm install @universal-packages/time-measurer
 ```
 
+## startMeasurement()
+
+Creates a new TimeMeasurer instance to start a measurerment.
+
+```ts
+import { startMeasurement } from '@universal-packages/time-measurer'
+
+async function getAll() {
+  const measurer = startMeasurement()
+  const data = await myDB.getAllRecords()
+  const measurement = measurer.finish()
+
+  console.log('All records - ', measurement.toString())
+}
+
+
+getAll()
+// > All records - 2.23ms
+```
+
 ## TimeMeasurer
 
-Class `TimeMeasurer` provides an instantiable interface to start measuring time from any part of your code.
+Class `TimeMeasurer` provides an instantiable interface to start measuring time from any part of your code. The measurement starts at instancing time.
 
 ```js
 import TimeMeasurer from '@universal-packages/time-measurer'
@@ -21,14 +41,11 @@ import TimeMeasurer from '@universal-packages/time-measurer'
 async function getAll() {
   const measurer = new TimeMeasurer()
 
-  measurer.start()
-
   const data = await myDB.getAllRecords()
   const measurement = measurer.finish()
 
   console.log('All records - ', measurement.toString())
 }
-
 
 getAll()
 // > All records - 2.23ms
@@ -52,10 +69,10 @@ measurement.toString('Expressive')
 You will get someting like
 
 ```
-02hrs 35min 51.235sec
-02:35:51.235
-02hrs 35min 51.235sec
-02 Hours, 35 Minutes, and 51.235 Seconds
+2hrs 35min 51.235sec
+2:35:51.235
+2hrs 35min 51.235sec
+2 Hours, 35 Minutes, and 51.235 Seconds
 ```
 
 It will take into account parts of the representation that are not contributing to the time, like if the measurement only took seconds, minutes and hours will not be included.
@@ -73,26 +90,6 @@ Get the time representation as a date object this can be helpful if you want to 
 
 ```js
 measurement.toDate()
-```
-
-## Functional
-
-A more simple way to use the time measurer API is by importing just the `start` and `finish` functions, the only disadvantage here is that you can only measure one thing at a time, unlike `TimeMeasurer` that can be instantiated multiple times and measurer several things useful when you have a lot of async tasks running.
-
-```ts
-import { start, finish } from '@universal-packages/time-measurer'
-
-async function getAll() {
-  start()
-  const data = await myDB.getAllRecords()
-  const measurement = finish()
-
-  console.log('All records - ', measurement.toString())
-}
-
-
-getAll()
-// > All records - 2.23ms
 ```
 
 ## Sleep

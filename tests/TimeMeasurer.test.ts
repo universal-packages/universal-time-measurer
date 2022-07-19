@@ -1,11 +1,10 @@
-import TimeMeasurer from '../src'
+import TimeMeasurer, { sleep } from '../src'
 
 describe('TimeMeasurer', (): void => {
   it('starts and ends a measurement', async (): Promise<void> => {
     const processMeasurer = new TimeMeasurer()
 
-    processMeasurer.start()
-    await TimeMeasurer.sleep(500)
+    await sleep(500)
 
     const measurement = processMeasurer.finish()
 
@@ -14,13 +13,11 @@ describe('TimeMeasurer', (): void => {
 
   it('can measure with diffenret instances', async (): Promise<void> => {
     const processMeasurer = new TimeMeasurer()
+
+    await sleep(500)
+
     const secondaryTimeMeasurer = new TimeMeasurer()
-
-    processMeasurer.start()
-    await TimeMeasurer.sleep(500)
-
-    secondaryTimeMeasurer.start()
-    await TimeMeasurer.sleep(600)
+    await sleep(600)
 
     const measurement = processMeasurer.finish()
     const secondaryMeasurement = secondaryTimeMeasurer.finish()
@@ -28,13 +25,5 @@ describe('TimeMeasurer', (): void => {
     expect(measurement.seconds).toBe(1)
     expect(secondaryMeasurement.seconds).toBe(0)
     expect(secondaryMeasurement.milliseconds).toBeGreaterThanOrEqual(600)
-  })
-
-  it('throws if calling finish without calling start first', async (): Promise<void> => {
-    const processMeasurer = new TimeMeasurer()
-
-    expect((): void => {
-      processMeasurer.finish()
-    }).toThrow('Time measurer finished without previously started')
   })
 })
