@@ -36,7 +36,7 @@ getAll()
 Class `TimeMeasurer` provides an instantiable interface to start measuring time from any part of your code. The measurement starts at instancing time.
 
 ```js
-import TimeMeasurer from '@universal-packages/time-measurer'
+import { TimeMeasurer } from '@universal-packages/time-measurer'
 
 async function getAll() {
   const measurer = new TimeMeasurer()

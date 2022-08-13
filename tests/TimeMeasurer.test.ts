@@ -1,4 +1,4 @@
-import TimeMeasurer, { sleep } from '../src'
+import { sleep, TimeMeasurer } from '../src'
 
 describe('TimeMeasurer', (): void => {
   it('starts and ends a measurement', async (): Promise<void> => {
