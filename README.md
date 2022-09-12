@@ -1,4 +1,5 @@
 # Time Measurer
+
 [![npm version](https://badge.fury.io/js/@universal-packages%2Ftime-measurer.svg)](https://www.npmjs.com/package/@universal-packages/time-measurer)
 [![Testing](https://github.com/universal-packages/universal-time-measurer/actions/workflows/testing.yml/badge.svg)](https://github.com/universal-packages/universal-time-measurer/actions/workflows/testing.yml)
 [![codecov](https://codecov.io/gh/universal-packages/universal-time-measurer/branch/main/graph/badge.svg?token=CXPJSN8IGL)](https://codecov.io/gh/universal-packages/universal-time-measurer)
@@ -25,7 +26,6 @@ async function getAll() {
 
   console.log('All records - ', measurement.toString())
 }
-
 
 getAll()
 // > All records - 2.23ms
@@ -96,7 +96,6 @@ measurement.toDate()
 
 Time measurer ships with a convenient sleep function that takes a single parameter `time` in milliseconds, internally it is just a promise with a timeout that resolves it.
 
-
 ```js
 import TimeMeasurer, { sleep } from '@universal-packages/time-measurer'
 
@@ -105,7 +104,6 @@ async function waitable() {
 
   sleep(2000)
 }
-
 ```
 
 ## Typescript
@@ -122,4 +120,3 @@ The development of this library happens in the open on GitHub, and we are gratef
 ### License
 
 [MIT licensed](./LICENSE).
-
