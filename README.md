@@ -97,12 +97,10 @@ measurement.toDate()
 Time measurer ships with a convenient sleep function that takes a single parameter `time` in milliseconds, internally it is just a promise with a timeout that resolves it.
 
 ```js
-import TimeMeasurer, { sleep } from '@universal-packages/time-measurer'
+import { sleep } from '@universal-packages/time-measurer'
 
 async function waitable() {
-  TimeMeasurer.sleep(1000)
-
-  sleep(2000)
+  await sleep(2000)
 }
 ```
 
