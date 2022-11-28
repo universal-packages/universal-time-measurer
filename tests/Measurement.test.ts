@@ -10,7 +10,7 @@ describe('Measurement', (): void => {
     expect(measurement.milliseconds).toBe(234.56789)
   })
 
-  it('can be converted into a formated string', async (): Promise<void> => {
+  it('can be converted into a formatted string', async (): Promise<void> => {
     let measurement = new Measurement(9305234567890n)
 
     expect(measurement.toString()).toEqual('2hrs 35min 5.235sec')

@@ -21,11 +21,11 @@ export default class Measurement {
     this.milliseconds = Number(currentNanoseconds) / 1000000
   }
 
-  /** Returns the measured time in a formated string */
+  /** Returns the measured time in a formatted string */
   public toString(format: TimeFormat = 'Human'): string {
     switch (format) {
       case 'Condensed':
-        return this.getCondenced()
+        return this.getCondensed()
       case 'Human':
         return this.getHuman()
       case 'Expressive':
@@ -33,12 +33,12 @@ export default class Measurement {
     }
   }
 
-  /** Returns the measured time in a formated string */
+  /** Returns the measured time in a formatted string */
   public toDate(): Date {
     return new Date(0, 0, 0, this.hours, this.minutes, this.seconds, this.milliseconds)
   }
 
-  private getCondenced(): string {
+  private getCondensed(): string {
     if (this.hours !== 0) {
       return `${this.pad(this.hours)}:${this.pad(this.minutes)}:${this.pad(this.seconds)}.${this.pad(this.milliseconds, 3)}`
     } else if (this.minutes !== 0) {

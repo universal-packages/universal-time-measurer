@@ -14,7 +14,7 @@ npm install @universal-packages/time-measurer
 
 ## startMeasurement()
 
-Creates a new TimeMeasurer instance to start a measurerment.
+Creates a new TimeMeasurer instance to start a measurement.
 
 ```ts
 import { startMeasurement } from '@universal-packages/time-measurer'
@@ -66,7 +66,7 @@ measurement.toString('Human')
 measurement.toString('Expressive')
 ```
 
-You will get someting like
+You will get something like
 
 ```
 2hrs 35min 51.235sec

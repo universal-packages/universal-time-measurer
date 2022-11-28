@@ -2,20 +2,20 @@ import Measurement from './Measurement'
 
 /**
  *
- * It meassures the time a process takes from the time start is called
+ * It measures the time a process takes from the time start is called
  * to when the finish method is called
  *
  */
 export default class TimeMeasurer {
-  private hrstart: bigint
+  private hrStart: bigint
 
   public constructor() {
-    this.hrstart = process.hrtime.bigint()
+    this.hrStart = process.hrtime.bigint()
   }
 
-  /** Returns a measurement representing the time passed from when start wass colled */
+  /** Returns a measurement representing the time passed from when start was called */
   public finish(): Measurement {
-    const nanoseconds = process.hrtime.bigint() - this.hrstart
+    const nanoseconds = process.hrtime.bigint() - this.hrStart
 
     return new Measurement(nanoseconds)
   }
