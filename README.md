@@ -14,7 +14,7 @@ npm install @universal-packages/time-measurer
 
 ## Global methods
 
-####**`startMeasurement()`**
+#### **`startMeasurement()`**
 
 Creates a new TimeMeasurer instance to start a measurement.
 
@@ -33,7 +33,7 @@ getAll()
 // > All records - 2.23ms
 ```
 
-####**`sleep(milliseconds: number)`**
+#### **`sleep(milliseconds: number)`**
 
 Time measurer ships with a convenient sleep function that takes a single parameter `time` in milliseconds, internally it is just a promise with a timeout that resolves it.
 
@@ -69,10 +69,12 @@ getAll()
 
 ### Instance methods
 
-####**`start()`**
+#### **`start()`**
+
 Resets the initial time.
 
-####**`stop()`**
+#### **`stop()`**
+
 Returns a measurement representing the time passed from when start was called.
 
 ## Measurement
@@ -81,7 +83,7 @@ A `Measurement` object is the time representation after a measure, it provides t
 
 ### Instance methods
 
-####**`toString(format: TimeFormat)`**
+#### **`toString(format: TimeFormat)`**
 
 Get the time representation as a string, this function takes one param `TimeFormat`, that can be one of `Condensed`, `Human`, `Expressive`, default: `Human`.
 
@@ -103,7 +105,7 @@ It will take into account parts of the representation that are not contributing 
 51.235 Seconds
 ```
 
-####**`toDate()`**
+#### **`toDate()`**
 
 Get the time representation as a date object this can be helpful if you want to use the `Date` api to format or do whatever with the date.
 
