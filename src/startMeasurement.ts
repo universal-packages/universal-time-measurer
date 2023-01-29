@@ -1,5 +1,9 @@
 import TimeMeasurer from './TimeMeasurer'
 
 export function startMeasurement(): TimeMeasurer {
-  return new TimeMeasurer()
+  const measurer = new TimeMeasurer()
+
+  measurer.start()
+
+  return measurer
 }

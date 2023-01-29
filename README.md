@@ -41,6 +41,8 @@ import { TimeMeasurer } from '@universal-packages/time-measurer'
 async function getAll() {
   const measurer = new TimeMeasurer()
 
+  measurer.start()
+
   const data = await myDB.getAllRecords()
   const measurement = measurer.finish()
 
@@ -99,7 +101,7 @@ Time measurer ships with a convenient sleep function that takes a single paramet
 ```js
 import { sleep } from '@universal-packages/time-measurer'
 
-async function waitable() {
+async function awaitable() {
   await sleep(2000)
 }
 ```

@@ -7,9 +7,10 @@ import Measurement from './Measurement'
  *
  */
 export default class TimeMeasurer {
-  private hrStart: bigint
+  private hrStart: bigint = 0n
 
-  public constructor() {
+  /** Resets the initial time */
+  public start(): void {
     this.hrStart = process.hrtime.bigint()
   }
 

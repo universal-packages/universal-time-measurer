@@ -3,6 +3,7 @@ import { sleep, TimeMeasurer } from '../src'
 describe('TimeMeasurer', (): void => {
   it('starts and ends a measurement', async (): Promise<void> => {
     const processMeasurer = new TimeMeasurer()
+    processMeasurer.start()
 
     await sleep(500)
 
@@ -11,12 +12,15 @@ describe('TimeMeasurer', (): void => {
     expect(measurement.milliseconds).toBeGreaterThanOrEqual(500)
   })
 
-  it('can measure with diffenret instances', async (): Promise<void> => {
+  it('can measure with different instances', async (): Promise<void> => {
     const processMeasurer = new TimeMeasurer()
+    processMeasurer.start()
 
     await sleep(500)
 
     const secondaryTimeMeasurer = new TimeMeasurer()
+    secondaryTimeMeasurer.start()
+
     await sleep(600)
 
     const measurement = processMeasurer.finish()
