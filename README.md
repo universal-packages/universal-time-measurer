@@ -12,11 +12,9 @@ Time Measurer is a simple wrap for `process.hrtime.bigint` to measure time with 
 npm install @universal-packages/time-measurer
 ```
 
-## startMeasurement
+## Global methods
 
-**`startMeasurement()`**
-
----
+####**`startMeasurement()`**
 
 Creates a new TimeMeasurer instance to start a measurement.
 
@@ -33,6 +31,18 @@ async function getAll() {
 
 getAll()
 // > All records - 2.23ms
+```
+
+####**`sleep(milliseconds: number)`**
+
+Time measurer ships with a convenient sleep function that takes a single parameter `time` in milliseconds, internally it is just a promise with a timeout that resolves it.
+
+```js
+import { sleep } from '@universal-packages/time-measurer'
+
+async function awaitable() {
+  await sleep(2000)
+}
 ```
 
 ## TimeMeasurer
@@ -57,22 +67,25 @@ getAll()
 // > All records - 2.23ms
 ```
 
+### Instance methods
+
+####**`start()`**
+Resets the initial time.
+
+####**`stop()`**
+Returns a measurement representing the time passed from when start was called.
+
 ## Measurement
 
 A `Measurement` object is the time representation after a measure, it provides the interface to express time as a formatted string or even as a date object.
 
-### .toString()
+### Instance methods
+
+####**`toString(format: TimeFormat)`**
 
 Get the time representation as a string, this function takes one param `TimeFormat`, that can be one of `Condensed`, `Human`, `Expressive`, default: `Human`.
 
-```js
-measurement.toString()
-measurement.toString('Condensed')
-measurement.toString('Human')
-measurement.toString('Expressive')
-```
-
-You will get something like
+Example output
 
 ```
 2hrs 35min 51.235sec
@@ -90,25 +103,9 @@ It will take into account parts of the representation that are not contributing 
 51.235 Seconds
 ```
 
-### .toString()
+####**`toDate()`**
 
 Get the time representation as a date object this can be helpful if you want to use the `Date` api to format or do whatever with the date.
-
-```js
-measurement.toDate()
-```
-
-## Sleep
-
-Time measurer ships with a convenient sleep function that takes a single parameter `time` in milliseconds, internally it is just a promise with a timeout that resolves it.
-
-```js
-import { sleep } from '@universal-packages/time-measurer'
-
-async function awaitable() {
-  await sleep(2000)
-}
-```
 
 ## Typescript
 
