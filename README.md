@@ -12,7 +12,11 @@ Time Measurer is a simple wrap for `process.hrtime.bigint` to measure time with 
 npm install @universal-packages/time-measurer
 ```
 
-## startMeasurement()
+## startMeasurement
+
+**`startMeasurement()`**
+
+---
 
 Creates a new TimeMeasurer instance to start a measurement.
 
