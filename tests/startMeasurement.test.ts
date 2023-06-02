@@ -1,4 +1,4 @@
-import { startMeasurement, sleep } from '../src'
+import { sleep, startMeasurement } from '../src'
 
 describe('startMeasurement', (): void => {
   it('starts and ends a measurement as a single instance', async (): Promise<void> => {
