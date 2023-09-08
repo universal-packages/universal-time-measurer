@@ -1,7 +1,9 @@
 name: Publish package
-on:
-  release:
-    types: [released]
+
+on: 
+  push:
+    tags:
+      - '*'
 
 jobs:
   build-and-publish:
@@ -20,6 +22,9 @@ jobs:
       - run: cp package.json dist
       - run: cp README.md dist
       - run: cp LICENSE.md dist
+
+      - uses: softprops/action-gh-release@v1
+
       - run: npm publish --access public
         working-directory: ./dist
         env:
