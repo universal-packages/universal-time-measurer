@@ -1,9 +1,10 @@
-name: Publish package
+name: Publish
 
 on: 
   push:
     tags:
       - '*'
+
 
 jobs:
   build-and-publish:
