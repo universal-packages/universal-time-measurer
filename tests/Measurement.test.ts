@@ -1,6 +1,6 @@
 import { Measurement } from '../src'
 
-describe('Measurement', (): void => {
+describe(Measurement, (): void => {
   it('receives nanoseconds and sets time values', async (): Promise<void> => {
     const measurement = new Measurement(9351234567890n)
 
