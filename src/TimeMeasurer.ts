@@ -8,15 +8,26 @@ import Measurement from './Measurement'
  */
 export default class TimeMeasurer {
   private hrStart: bigint = 0n
+  private startTime: number = 0
 
   /** Resets the initial time */
   public start(): void {
-    this.hrStart = process.hrtime.bigint()
+    if (typeof process !== 'undefined' && process.hrtime) {
+      this.hrStart = process.hrtime.bigint()
+    } else {
+      this.startTime = performance.now()
+    }
   }
 
   /** Returns a measurement representing the time passed from when start was called */
   public finish(): Measurement {
-    const nanoseconds = process.hrtime.bigint() - this.hrStart
+    let nanoseconds: bigint
+    if (typeof process !== 'undefined' && process.hrtime) {
+      nanoseconds = process.hrtime.bigint() - this.hrStart
+    } else {
+      const milliseconds = performance.now() - this.startTime
+      nanoseconds = BigInt(Math.round(milliseconds * 1e6))
+    }
 
     return new Measurement(nanoseconds)
   }

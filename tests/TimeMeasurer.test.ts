@@ -30,4 +30,20 @@ describe(TimeMeasurer, (): void => {
     expect(secondaryMeasurement.seconds).toBe(0)
     expect(secondaryMeasurement.milliseconds).toBeGreaterThanOrEqual(600)
   })
+
+  it('uses performance API when process is not defined', async (): Promise<void> => {
+    const originalProcess = global.process
+    delete global.process
+
+    const processMeasurer = new TimeMeasurer()
+    processMeasurer.start()
+
+    await sleep(500)
+
+    const measurement = processMeasurer.finish()
+
+    expect(measurement.milliseconds).toBeGreaterThanOrEqual(500)
+
+    global.process = originalProcess
+  })
 })
