@@ -1,6 +1,6 @@
 import { TimeFormat } from './Measurement.types'
 
-export default class Measurement {
+export class Measurement {
   public readonly hours: number
   public readonly minutes: number
   public readonly seconds: number
@@ -21,7 +21,11 @@ export default class Measurement {
     this.milliseconds = Number(currentNanoseconds) / 1000000
   }
 
-  /** Returns the measured time in a formatted string */
+  /**
+   * Convert the measurement to a string
+   * @param format - The format to convert the measurement to
+   * @returns The measurement as a string
+   */
   public toString(format: TimeFormat = 'Human'): string {
     switch (format) {
       case 'Condensed':
@@ -33,11 +37,23 @@ export default class Measurement {
     }
   }
 
-  /** Returns the measured time in a formatted string */
+  /**
+   * Convert the measurement to a date
+   * @returns The measurement as a date
+   */
   public toDate(): Date {
     return new Date(0, 0, 0, this.hours, this.minutes, this.seconds, this.milliseconds)
   }
 
+  /**
+   * Convert the measurement to a condensed string
+   *
+   * 1000ms = 1.000s
+   * 60s = 1m
+   * 60m = 1h
+   *
+   * @returns The measurement as a condensed string
+   */
   private getCondensed(): string {
     if (this.hours !== 0) {
       return `${this.pad(this.hours)}:${this.pad(this.minutes)}:${this.pad(this.seconds)}.${this.pad(this.milliseconds, 3)}`
@@ -50,6 +66,15 @@ export default class Measurement {
     }
   }
 
+  /**
+   * Convert the measurement to a human readable string
+   *
+   * 1000ms = 1.000sec
+   * 60s = 1min
+   * 60m = 1hrs
+   *
+   * @returns The measurement as a human readable string
+   */
   private getHuman(): string {
     if (this.hours !== 0) {
       return `${this.hours}hrs ${this.minutes}min ${this.seconds}.${this.pad(this.milliseconds, 3)}sec`
@@ -62,6 +87,15 @@ export default class Measurement {
     }
   }
 
+  /**
+   * Convert the measurement to a expressive string
+   *
+   * 1000ms = 1.000 Second
+   * 60s = 1 Minute
+   * 60m = 1 Hour
+   *
+   * @returns The measurement as a expressive string
+   */
   private gerExpressive(): string {
     if (this.hours !== 0) {
       return `${this.hours} Hours, ${this.minutes} Minutes, and ${this.seconds}.${this.pad(this.milliseconds, 3)} Seconds`
@@ -74,6 +108,13 @@ export default class Measurement {
     }
   }
 
+  /**
+   * Pad a number with zeros
+   * @param num - The number to pad
+   * @param places - The number of places to pad the number to
+   * @param fixPositions - The number of positions to fix the number to
+   * @returns The padded number
+   */
   private pad(num: number, places = 2, fixPositions = 0): string {
     return num.toFixed(fixPositions).padStart(places, '0')
   }

@@ -1,17 +1,27 @@
-import Measurement from './Measurement'
+import { Measurement } from './Measurement'
 
-/**
- *
- * It measures the time a process takes from the time start is called
- * to when the finish method is called
- *
- */
-export default class TimeMeasurer {
+export class TimeMeasurer {
   private hrStart: bigint = 0n
   private startTime: number = 0
 
-  /** Resets the initial time */
+  /**
+   * Start a new measurer
+   * @returns Measurer instance
+   */
+  public static start(): TimeMeasurer {
+    const measurer = new TimeMeasurer()
+    measurer.start()
+    return measurer
+  }
+
+  /**
+   * Start the measurer
+   */
   public start(): void {
+    if (this.hrStart || this.startTime) {
+      throw new Error('Measurer already started')
+    }
+
     if (typeof process !== 'undefined' && process.hrtime) {
       this.hrStart = process.hrtime.bigint()
     } else {
@@ -19,7 +29,10 @@ export default class TimeMeasurer {
     }
   }
 
-  /** Returns a measurement representing the time passed from when start was called */
+  /**
+   * Finish the measurer
+   * @returns Measurement instance
+   */
   public finish(): Measurement {
     let nanoseconds: bigint
     if (typeof process !== 'undefined' && process.hrtime) {

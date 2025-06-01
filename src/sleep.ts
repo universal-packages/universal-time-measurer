@@ -1,4 +1,8 @@
-/** Simple awaitable timeout to sleep the process */
-export default async function sleep(milliseconds: number): Promise<void> {
-  return new Promise((resolve): NodeJS.Timeout => setTimeout((): void => resolve(), milliseconds))
+import ms, { StringValue } from 'ms'
+
+export class Sleep {
+  public static async for(timeString: StringValue): Promise<void> {
+    const duration = ms(timeString)
+    return new Promise((resolve) => setTimeout(resolve, duration))
+  }
 }
