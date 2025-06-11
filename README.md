@@ -86,7 +86,7 @@ const measurement = measurer.finish()
 
 ## Measurement `class`
 
-The `Measurement` class represents a measured time duration with various formatting options and convenient accessors for different time units.
+The `Measurement` class represents a measured time duration with various formatting options, convenient accessors for different time units, arithmetic operations, and comparison capabilities.
 
 ```ts
 import { Measurement, TimeMeasurer } from '@universal-packages/time-measurer'
@@ -99,6 +99,17 @@ console.log(measurement.hours) // 0
 console.log(measurement.minutes) // 0
 console.log(measurement.seconds) // 1
 console.log(measurement.milliseconds) // 234.567
+
+// Arithmetic operations
+const measurement1 = new Measurement(1000000000n) // 1 second
+const measurement2 = new Measurement(2000000000n) // 2 seconds
+
+const sum = measurement1.add(measurement2)
+console.log(sum.toString()) // "3.000sec"
+
+// Comparison operations
+console.log(measurement1 < measurement2) // true
+console.log(measurement1.lessThan(measurement2)) // true
 ```
 
 ### Constructor <small><small>`constructor`</small></small>
@@ -115,8 +126,141 @@ Creates a new Measurement instance from nanoseconds. This is typically called in
 - **`minutes`**: `number` - The minutes component of the measurement
 - **`seconds`**: `number` - The seconds component of the measurement
 - **`milliseconds`**: `number` - The milliseconds component (including fractional part)
+- **`nanoseconds`**: `bigint` - The total nanoseconds of the measurement
 
 ### Instance Methods
+
+#### Arithmetic Operations
+
+##### add
+
+```ts
+add(other: Measurement): Measurement
+```
+
+Adds another measurement to this one and returns a new measurement with the sum of both times.
+
+```ts
+const measurement1 = new Measurement(1000000000n) // 1 second
+const measurement2 = new Measurement(500000000n)  // 0.5 seconds
+const sum = measurement1.add(measurement2)
+console.log(sum.toString()) // "1.500sec"
+```
+
+##### subtract
+
+```ts
+subtract(other: Measurement): Measurement
+```
+
+Subtracts another measurement from this one and returns a new measurement with the difference. If the result would be negative, returns a zero measurement.
+
+```ts
+const measurement1 = new Measurement(2000000000n) // 2 seconds
+const measurement2 = new Measurement(500000000n)  // 0.5 seconds
+const difference = measurement1.subtract(measurement2)
+console.log(difference.toString()) // "1.500sec"
+
+// Negative results are clamped to zero
+const negative = measurement2.subtract(measurement1)
+console.log(negative.toString()) // "0.00ms"
+```
+
+#### Comparison Methods
+
+##### equals
+
+```ts
+equals(other: Measurement): boolean
+```
+
+Checks if this measurement is equal to another measurement.
+
+```ts
+const measurement1 = new Measurement(1000000000n)
+const measurement2 = new Measurement(1000000000n)
+console.log(measurement1.equals(measurement2)) // true
+```
+
+##### lessThan
+
+```ts
+lessThan(other: Measurement): boolean
+```
+
+Checks if this measurement is less than another measurement.
+
+```ts
+const measurement1 = new Measurement(500000000n)  // 0.5 seconds
+const measurement2 = new Measurement(1000000000n) // 1 second
+console.log(measurement1.lessThan(measurement2)) // true
+```
+
+##### greaterThan
+
+```ts
+greaterThan(other: Measurement): boolean
+```
+
+Checks if this measurement is greater than another measurement.
+
+```ts
+console.log(measurement2.greaterThan(measurement1)) // true
+```
+
+##### lessThanOrEqual
+
+```ts
+lessThanOrEqual(other: Measurement): boolean
+```
+
+Checks if this measurement is less than or equal to another measurement.
+
+##### greaterThanOrEqual
+
+```ts
+greaterThanOrEqual(other: Measurement): boolean
+```
+
+Checks if this measurement is greater than or equal to another measurement.
+
+#### Operator Overloading
+
+The `Measurement` class supports JavaScript's native comparison and arithmetic operators through `Symbol.toPrimitive`:
+
+```ts
+const measurement1 = new Measurement(1000000000n) // 1 second
+const measurement2 = new Measurement(2000000000n) // 2 seconds
+
+// Comparison operators (recommended)
+console.log(measurement1 < measurement2)  // true
+console.log(measurement1 > measurement2)  // false
+console.log(measurement1 <= measurement2) // true
+console.log(measurement1 >= measurement2) // false
+console.log(measurement1 == measurement2) // false
+console.log(measurement1 != measurement2) // true
+
+// Arithmetic operators (returns numbers in nanoseconds)
+console.log(measurement1 + measurement2) // 3000000000 (nanoseconds)
+console.log(measurement2 - measurement1) // 1000000000 (nanoseconds)
+
+// For arithmetic operations that return Measurement objects, use methods:
+const sum = measurement1.add(measurement2)     // Returns Measurement
+const diff = measurement2.subtract(measurement1) // Returns Measurement
+```
+
+#### Method Chaining
+
+All arithmetic methods return new `Measurement` instances, allowing for method chaining:
+
+```ts
+const base = new Measurement(1000000000n)    // 1 second
+const half = new Measurement(500000000n)     // 0.5 seconds
+const quarter = new Measurement(250000000n)  // 0.25 seconds
+
+const result = base.add(half).subtract(quarter)
+console.log(result.toString()) // "1.250sec"
+```
 
 #### toString
 

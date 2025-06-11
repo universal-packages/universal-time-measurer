@@ -1,24 +1,128 @@
 import { TimeFormat } from './Measurement.types'
 
 export class Measurement {
-  public readonly hours: number
-  public readonly minutes: number
-  public readonly seconds: number
-  public readonly milliseconds: number
+  private _nanoseconds: bigint
+  private _milliseconds: number
+  private _seconds: number
+  private _minutes: number
+  private _hours: number
+
+  public get nanoseconds(): bigint {
+    return this._nanoseconds
+  }
+
+  public get milliseconds(): number {
+    return this._milliseconds
+  }
+
+  public get seconds(): number {
+    return this._seconds
+  }
+
+  public get minutes(): number {
+    return this._minutes
+  }
+
+  public get hours(): number {
+    return this._hours
+  }
 
   public constructor(nanoseconds: bigint) {
+    this._nanoseconds = nanoseconds
+
     let currentNanoseconds = nanoseconds
 
-    this.hours = Number(currentNanoseconds / 3600000000000n)
-    currentNanoseconds = currentNanoseconds - BigInt(Math.floor(this.hours)) * 3600000000000n
+    this._hours = Number(currentNanoseconds / 3600000000000n)
+    currentNanoseconds = currentNanoseconds - BigInt(Math.floor(this._hours)) * 3600000000000n
 
-    this.minutes = Number(currentNanoseconds / 60000000000n)
-    currentNanoseconds = currentNanoseconds - BigInt(Math.floor(this.minutes)) * 60000000000n
+    this._minutes = Number(currentNanoseconds / 60000000000n)
+    currentNanoseconds = currentNanoseconds - BigInt(Math.floor(this._minutes)) * 60000000000n
 
-    this.seconds = Number(currentNanoseconds / 1000000000n)
-    currentNanoseconds = currentNanoseconds - BigInt(Math.floor(this.seconds)) * 1000000000n
+    this._seconds = Number(currentNanoseconds / 1000000000n)
+    currentNanoseconds = currentNanoseconds - BigInt(Math.floor(this._seconds)) * 1000000000n
 
-    this.milliseconds = Number(currentNanoseconds) / 1000000
+    this._milliseconds = Number(currentNanoseconds) / 1000000
+  }
+
+  /**
+   * Convert the measurement to a primitive value
+   * @param hint - The hint to convert the measurement to
+   * @returns The measurement as a primitive value
+   */
+  [Symbol.toPrimitive](hint: 'bigint' | 'number' | 'string' | 'default'): bigint | number | string {
+    if (hint === 'bigint') {
+      return this.nanoseconds
+    } else if (hint === 'number' || hint === 'default') {
+      // For numeric operations and comparisons, return nanoseconds as number
+      return Number(this.nanoseconds)
+    } else if (hint === 'string') {
+      return this.toString()
+    }
+    return Number(this.nanoseconds)
+  }
+
+  /**
+   * Add another measurement to this one
+   * @param other - The measurement to add
+   * @returns A new measurement with the sum of both times
+   */
+  public add(other: Measurement): Measurement {
+    return new Measurement(this.nanoseconds + other.nanoseconds)
+  }
+
+  /**
+   * Subtract another measurement from this one
+   * @param other - The measurement to subtract
+   * @returns A new measurement with the difference
+   */
+  public subtract(other: Measurement): Measurement {
+    const result = this.nanoseconds - other.nanoseconds
+    return new Measurement(result < 0n ? 0n : result)
+  }
+
+  /**
+   * Check if this measurement is equal to another
+   * @param other - The measurement to compare with
+   * @returns True if measurements are equal
+   */
+  public equals(other: Measurement): boolean {
+    return this.nanoseconds === other.nanoseconds
+  }
+
+  /**
+   * Check if this measurement is less than another
+   * @param other - The measurement to compare with
+   * @returns True if this measurement is less than the other
+   */
+  public lessThan(other: Measurement): boolean {
+    return this.nanoseconds < other.nanoseconds
+  }
+
+  /**
+   * Check if this measurement is greater than another
+   * @param other - The measurement to compare with
+   * @returns True if this measurement is greater than the other
+   */
+  public greaterThan(other: Measurement): boolean {
+    return this.nanoseconds > other.nanoseconds
+  }
+
+  /**
+   * Check if this measurement is less than or equal to another
+   * @param other - The measurement to compare with
+   * @returns True if this measurement is less than or equal to the other
+   */
+  public lessThanOrEqual(other: Measurement): boolean {
+    return this.nanoseconds <= other.nanoseconds
+  }
+
+  /**
+   * Check if this measurement is greater than or equal to another
+   * @param other - The measurement to compare with
+   * @returns True if this measurement is greater than or equal to the other
+   */
+  public greaterThanOrEqual(other: Measurement): boolean {
+    return this.nanoseconds >= other.nanoseconds
   }
 
   /**

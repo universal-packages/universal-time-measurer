@@ -2,6 +2,7 @@ import { runAllExamples as runBasicTimeMeasurement } from './01-basic-time-measu
 import { runAllBenchmarkExamples } from './02-benchmark-examples'
 import { runAllProfilerExamples } from './03-time-profiler-examples'
 import { runAllSleepExamples } from './04-sleep-examples'
+import { runAllMeasurementExamples } from './05-measurement-operations'
 
 /**
  * Run all examples in sequence with timing and organization
@@ -31,6 +32,11 @@ async function runAllExamples(): Promise<void> {
       name: 'Sleep Utility Examples',
       description: 'Async delays and rate limiting patterns',
       runner: runAllSleepExamples
+    },
+    {
+      name: 'Measurement Operations',
+      description: 'Arithmetic operations, comparisons, and operator overloading',
+      runner: runAllMeasurementExamples
     }
   ]
 
@@ -75,6 +81,7 @@ async function runAllExamples(): Promise<void> {
   console.log('• Benchmark: Performance testing with statistical analysis')
   console.log('• TimeProfiler: Checkpoint-based profiling with memory tracking')
   console.log('• Sleep: Human-readable async delays and rate limiting')
+  console.log('• Measurement Operations: Arithmetic, comparisons, and operator overloading')
   console.log('')
   console.log('🔗 For more information:')
   console.log('• Documentation: Check the README.md file')
